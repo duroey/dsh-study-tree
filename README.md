@@ -1,6 +1,6 @@
 # DSH Study Tree · 学习导航
 
-[English](README.en.md) · [架构说明](ARCHITECTURE.md) · [下载 v0.1.6](https://github.com/duroey/dsh-study-tree/releases/tag/v0.1.6) · [兼容检查](https://github.com/duroey/dsh-study-tree/actions/workflows/compatibility.yml)
+[English](https://github.com/duroey/dsh-study-tree/blob/main/README.en.md) · [架构说明](https://github.com/duroey/dsh-study-tree/blob/main/ARCHITECTURE.md) · [下载 v0.1.6](https://github.com/duroey/dsh-study-tree/releases/tag/v0.1.6) · [兼容检查](https://github.com/duroey/dsh-study-tree/actions/workflows/compatibility.yml)
 
 学习一个概念时，常常要先弄懂里面的另一个概念。DSH Study Tree 让你从回答中划词，派生一个继承上下文的新会话，再从新会话继续深入。父会话保留原来的讨论和阅读位置，树状导航负责把这些会话组织起来。
 
@@ -87,7 +87,7 @@ dsh plugin --profile web add github:duroey/dsh-study-tree#v0.1.6
 
 交互验收来自连续开发阶段；v0.1.6 重点重测了新旧两端的拖动，没有把整套递归 fork 流程重新跑一遍。公开 CI 检查固定版本和滚动的 `latest`，覆盖测试、打包、安装与接口契约；**CI 契约通过不等于真实 UI 全功能验收**。
 
-`engines.dsh` 声明 `>=0.1.1-rc.2 <1.0.0`，它是安装范围，不是对全部历史和未来版本的测试承诺。宿主仍在快速变化，尤其是文字定位的 DOM 约定和自动标题 helper，遇到变化时可能需要适配。具体边界见 [架构说明](ARCHITECTURE.md#兼容适配与已知边界) 和 [验收摘要](verification.json)。
+`engines.dsh` 声明 `>=0.1.1-rc.2 <1.0.0`，它是安装范围，不是对全部历史和未来版本的测试承诺。宿主仍在快速变化，尤其是文字定位的 DOM 约定和自动标题 helper，遇到变化时可能需要适配。具体边界见 [架构说明](https://github.com/duroey/dsh-study-tree/blob/main/ARCHITECTURE.md#兼容适配与已知边界) 和 [验收摘要](https://github.com/duroey/dsh-study-tree/blob/main/verification.json)。
 
 ## 数据保存与卸载
 
@@ -123,7 +123,7 @@ npm pack
 DSH_HOME=/path/to/your-dsh-home node scripts/check-host.mjs --runtime /path/to/installed-dsh --profile web
 ~~~
 
-这里必须使用此前已安装插件的同一 DSH_HOME 和 profile；脚本不会替你安装插件。命令需要使用与宿主匹配的 Node 版本；检查真实安装包，不借用相邻版本的声明。项目代码结构、数据格式、两种 fork 流程、恢复机制、依赖和兼容边界都在 [ARCHITECTURE.md](ARCHITECTURE.md)。
+这里必须使用此前已安装插件的同一 DSH_HOME 和 profile；脚本不会替你安装插件。命令需要使用与宿主匹配的 Node 版本；检查真实安装包，不借用相邻版本的声明。项目代码结构、数据格式、两种 fork 流程、恢复机制、依赖和兼容边界都在 [ARCHITECTURE.md](https://github.com/duroey/dsh-study-tree/blob/main/ARCHITECTURE.md)。
 
 ## 社区规范与许可
 
@@ -131,4 +131,4 @@ DSH_HOME=/path/to/your-dsh-home node scripts/check-host.mjs --runtime /path/to/i
 
 参考：[官方插件打包指南](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/develop/basic/publish.md)、[官方插件模板与资源说明](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/preset/agent-preset/skills/cordis-plugin-development/references/host-plugin.md)、[社区贡献说明](https://github.com/deepseek-ai/deepseek-harness/blob/master/CONTRIBUTING.md)。已公开源代码不代表获得任何第三方索引的收录或官方认证。
 
-MIT。选区捕获和原文定位参考并改编自 [DSH Inline Study](https://github.com/Chen-chy/dsh-inline-study)，原许可保留在 [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES)。
+MIT。选区捕获和原文定位参考并改编自 [DSH Inline Study](https://github.com/Chen-chy/dsh-inline-study)，原许可保留在 [THIRD_PARTY_NOTICES](https://github.com/duroey/dsh-study-tree/blob/main/THIRD_PARTY_NOTICES)。

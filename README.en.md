@@ -1,6 +1,6 @@
 # DSH Study Tree
 
-[中文](README.md) · [Architecture, in Chinese](ARCHITECTURE.md) · [Releases](https://github.com/duroey/dsh-study-tree/releases) · [Compatibility CI](https://github.com/duroey/dsh-study-tree/actions/workflows/compatibility.yml)
+[中文](https://github.com/duroey/dsh-study-tree/blob/main/README.md) · [Architecture, in Chinese](https://github.com/duroey/dsh-study-tree/blob/main/ARCHITECTURE.md) · [Releases](https://github.com/duroey/dsh-study-tree/releases) · [Compatibility CI](https://github.com/duroey/dsh-study-tree/actions/workflows/compatibility.yml)
 
 Follow a side question without losing the main conversation. Select text in a completed DSH answer, fork a real session with its context, and keep learning in native Agent chat.
 
@@ -63,7 +63,7 @@ Remove with `dsh plugin --profile web remove dsh-study-tree`. Removing the plugi
 
 On 2026-11-08, npm `latest` was `0.2.2-rc.1`. Existing manual acceptance covers recursive learning flows on `0.2.2-rc.1` and `0.1.1-rc.2`, and selected-text fork plus chat on `0.2.1-rc.5`. Version 0.1.6 specifically rechecked sibling dragging on the newest and oldest baselines. The legacy test fixture repairs upstream dependency drift.
 
-The declared range `>=0.1.1-rc.2 <1.0.0` is an installation policy, not a promise that every release has been tested. Scheduled CI checks installation and contracts against fixed versions and `latest`; it does not exercise the full UI. DOM anchoring and the host's title helper remain adaptation points. See [the verification summary](verification.json) and [architecture](ARCHITECTURE.md).
+The declared range `>=0.1.1-rc.2 <1.0.0` is an installation policy, not a promise that every release has been tested. Scheduled CI checks installation and contracts against fixed versions and `latest`; it does not exercise the full UI. DOM anchoring and the host's title helper remain adaptation points. See [the verification summary](https://github.com/duroey/dsh-study-tree/blob/main/verification.json) and [architecture](https://github.com/duroey/dsh-study-tree/blob/main/ARCHITECTURE.md).
 
 ~~~sh
 npm ci
@@ -77,4 +77,4 @@ The package follows the official [bundle format](https://github.com/deepseek-ai/
 
 ## License
 
-MIT. Text selection and source anchoring adapt [DSH Inline Study](https://github.com/Chen-chy/dsh-inline-study); its license is retained in [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES).
+MIT. Text selection and source anchoring adapt [DSH Inline Study](https://github.com/Chen-chy/dsh-inline-study); its license is retained in [THIRD_PARTY_NOTICES](https://github.com/duroey/dsh-study-tree/blob/main/THIRD_PARTY_NOTICES).
