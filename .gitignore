@@ -1,0 +1,6 @@
+node_modules/
+*.tgz
+coverage/
+.DS_Store
+.test-home/
+compatibility-report.json

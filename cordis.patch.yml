@@ -1,0 +1,4 @@
+# Installable bundle: Host persistence and the corresponding Web client.
+- insert:
+    - id: dsh-study-tree
+      name: dsh-study-tree

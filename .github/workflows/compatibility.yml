@@ -1,0 +1,105 @@
+name: DSH compatibility
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 2 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  contracts-and-installation:
+    name: DSH ${{ matrix.dsh }} contracts and installation
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        dsh: ['0.1.1-rc.2', '0.2.1-rc.5', '0.2.2-rc.1', 'latest']
+    env:
+      DSH_RUNTIME: ${{ runner.temp }}/dsh-runtime
+      DSH_HOME: ${{ runner.temp }}/dsh-home
+      DSH_AGENTS_HOME: ${{ runner.temp }}/agent-config
+      DSH_VERSION: ${{ matrix.dsh }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '12.15.0'
+      - name: Verify plugin and pack prebuilt artifacts
+        run: |
+          npm ci
+          npm run verify
+          npm pack --ignore-scripts --json --pack-destination "$RUNNER_TEMP" > "$RUNNER_TEMP/pack.json"
+          node --input-type=module <<'NODE'
+          import { readFileSync, appendFileSync } from 'node:fs';
+          import { join } from 'node:path';
+          const [artifact] = JSON.parse(readFileSync(join(process.env.RUNNER_TEMP, 'pack.json'), 'utf8'));
+          appendFileSync(process.env.GITHUB_ENV, `DSH_PLUGIN_PACKAGE=${join(process.env.RUNNER_TEMP, artifact.filename)}\n`);
+          NODE
+      - name: Prepare independent runtime and legacy-only fixture overrides
+        run: |
+          node --input-type=module <<'NODE'
+          import { mkdirSync, writeFileSync } from 'node:fs';
+          import { join } from 'node:path';
+          const legacy = process.env.DSH_VERSION === '0.1.1-rc.2';
+          // Test-runtime repairs never enter the distributed plugin manifest.
+          const overrides = legacy ? {
+            '@deepseek-ai/cordis': '4.0.1',
+            '@deepseek-ai/cordis-plugin-include': '1.0.6',
+            '@deepseek-ai/cordis-plugin-loader': '1.0.2',
+            '@deepseek-ai/cordis-plugin-group': '1.0.1',
+            '@deepseek-ai/cordis-plugin-timer': '1.1.3',
+            '@deepseek-ai/cordis-plugin-hmr': '1.0.16',
+            '@deepseek-ai/cosmokit': '1.8.2',
+            '@deepseek-ai/schemastery': '3.18.1',
+            react: '18.3.1',
+            'react-dom': '18.3.1',
+            '@opentelemetry/api': '1.9.0',
+          } : {};
+          mkdirSync(process.env.DSH_RUNTIME, { recursive: true });
+          writeFileSync(join(process.env.DSH_RUNTIME, 'package.json'), JSON.stringify({
+            private: true,
+            type: 'module',
+            dependencies: { '@deepseek-ai/dsh': process.env.DSH_VERSION },
+            ...(legacy ? { overrides } : {}),
+          }, null, 2));
+          writeFileSync(join(process.env.RUNNER_TEMP, 'legacy-overrides.json'), JSON.stringify(overrides));
+          NODE
+          npm install --prefix "$DSH_RUNTIME" --ignore-scripts --no-audit --no-fund --engine-strict
+      - name: Install packed plugin through the official DSH CLI
+        run: |
+          node --expose-internals "$DSH_RUNTIME/node_modules/@deepseek-ai/dsh/lib/bin.js" --profile web --dump-config > "$RUNNER_TEMP/baseline-config.yml"
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          import { join } from 'node:path';
+          const overrides = JSON.parse(readFileSync(join(process.env.RUNNER_TEMP, 'legacy-overrides.json'), 'utf8'));
+          const lines = ['packages:', '  - .', 'minimumReleaseAge: 0', 'ignoreScripts: true', 'allowBuilds:'];
+          for (const name of ['@deepseek-ai/dsh-subprocess-local', '@google/genai', 'koffi', 'node-pty', 'protobufjs']) {
+            lines.push(`  ${JSON.stringify(name)}: false`);
+          }
+          if (Object.keys(overrides).length > 0) {
+            lines.push('overrides:');
+            for (const [name, version] of Object.entries(overrides)) lines.push(`  ${JSON.stringify(name)}: ${JSON.stringify(version)}`);
+          }
+          writeFileSync(join(process.env.DSH_HOME, 'profiles/web/pnpm-workspace.yaml'), `${lines.join('\n')}\n`);
+          NODE
+          node --expose-internals "$DSH_RUNTIME/node_modules/@deepseek-ai/dsh/lib/bin.js" plugin --profile web add "$DSH_PLUGIN_PACKAGE"
+      - name: Check real installed contracts and profile composition
+        if: always()
+        run: node scripts/check-host.mjs --runtime "$DSH_RUNTIME" --profile web > compatibility-report.json
+      - name: Upload contract report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dsh-${{ matrix.dsh }}-contract-report
+          path: compatibility-report.json
+          if-no-files-found: warn

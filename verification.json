@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "pluginVersion": "0.1.6",
+  "checkedOn": "2026-11-08",
+  "timezone": "Asia/Shanghai",
+  "npmLatestChecked": "0.2.2-rc.1",
+  "automated": {
+    "node": "24.13.1",
+    "testsPassed": 75,
+    "testsFailed": 0,
+    "typecheck": true,
+    "build": true
+  },
+  "manualAcceptance": {
+    "0.2.2-rc.1": {
+      "priorDevelopmentAcceptance": [
+        "recursive selected-text fork",
+        "multi-turn native chat",
+        "parent-history isolation",
+        "return to source",
+        "reload restoration",
+        "temporary no-selection draft",
+        "native automatic titles"
+      ],
+      "v0.1.6Rechecked": [
+        "whole-row sibling sorting",
+        "root-topic sorting",
+        "cross-parent refusal",
+        "full-subtree drop indicator",
+        "draft preserved while sorting",
+        "edge auto-scroll",
+        "stationary-pointer wheel re-hit",
+        "cancel and outside release",
+        "normal row navigation",
+        "reload and current session preserved"
+      ]
+    },
+    "0.1.1-rc.2": {
+      "priorDevelopmentAcceptance": [
+        "recursive selected-text fork",
+        "multi-turn native chat",
+        "parent-history isolation",
+        "return to source",
+        "reload restoration",
+        "legacy draft overlay",
+        "native automatic titles"
+      ],
+      "v0.1.6Rechecked": [
+        "sibling sorting",
+        "cross-parent refusal",
+        "unsent draft cancellation",
+        "normal native conversation remains selected"
+      ],
+      "environment": "Isolated fixture with upstream Cordis/Schemastery/React dependency repairs; see compatibility workflow."
+    },
+    "0.2.1-rc.5": {
+      "priorDevelopmentAcceptance": [
+        "real selected-text fork",
+        "native chat"
+      ],
+      "v0.1.6Rechecked": []
+    }
+  },
+  "navigationAndHistory": {
+    "crossParentDragRejectedBeforePersistence": true,
+    "oneEarlierDemoNavigationMismatchCorrectedToRecordedForkSource": true,
+    "demoReordersRestored": true,
+    "forkSourceMetadataPreserved": true,
+    "nativeSessionCreationOrDeletionDuringDragChecks": false,
+    "chatPromptsSentDuringDragChecks": false,
+    "latestHostSessionLogSizeAndMtimeUnchanged": true,
+    "legacyHostObservation": "Loading one existing legacy session appended only a session/end-seed frame. No new chat or title event was observed.",
+    "legacyEvidenceLimit": "The pre-check retained file size/mtime rather than a byte copy; a byte-for-byte claim for the old file prefix is not made."
+  },
+  "publicDistribution": {
+    "format": "Official dsh.bundle and dsh.client manifests",
+    "localizedMetadata": [
+      "en",
+      "zh"
+    ],
+    "originalIcon": "icon.svg",
+    "prebuiltHostAndClient": true,
+    "noNewRuntimeDependencies": true,
+    "noUserSessionIdsOrPrivateHostPathsInThisSummary": true,
+    "remoteCi": "GitHub Actions is the live source for remote contract-check status; it does not replace UI acceptance.",
+    "releaseVerification": "See versioned GitHub release notes for public URL download/install results."
+  },
+  "limits": [
+    "The complete recursive fork flow was not rerun for the drag-only v0.1.6 patch.",
+    "The intermediate baseline has not received full UI acceptance.",
+    "Installed contract checks cover nine session/Slots/RPC capabilities, not all title helper or DOM behavior.",
+    "The declared DSH engine range is not an all-version acceptance claim.",
+    "No npm registry publication or third-party index inclusion is claimed."
+  ]
+}
