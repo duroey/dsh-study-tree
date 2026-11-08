@@ -21,9 +21,6 @@ jobs:
       matrix:
         dsh: ['0.1.1-rc.2', '0.2.1-rc.5', '0.2.2-rc.1', 'latest']
     env:
-      DSH_RUNTIME: ${{ runner.temp }}/dsh-runtime
-      DSH_HOME: ${{ runner.temp }}/dsh-home
-      DSH_AGENTS_HOME: ${{ runner.temp }}/agent-config
       DSH_VERSION: ${{ matrix.dsh }}
     steps:
       - uses: actions/checkout@v4
@@ -34,6 +31,9 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: '12.15.0'
+      - name: Set isolated host paths
+        run: |
+          printf '%s\n' "DSH_RUNTIME=$RUNNER_TEMP/dsh-runtime" "DSH_HOME=$RUNNER_TEMP/dsh-home" "DSH_AGENTS_HOME=$RUNNER_TEMP/agent-config" >> "$GITHUB_ENV"
       - name: Verify plugin and pack prebuilt artifacts
         run: |
           npm ci
