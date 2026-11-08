@@ -26,18 +26,20 @@ The learning controls currently use Chinese; Plugin Manager metadata is supplied
 
 Requires DeepSeek Harness Web. Node.js 24 is recommended. Set up the host using the [official instructions](https://github.com/deepseek-ai/deepseek-harness#run).
 
-Install the prebuilt release:
-
-~~~sh
-dsh plugin --profile web add https://github.com/duroey/dsh-study-tree/releases/download/v0.1.6/dsh-study-tree-0.1.6.tgz
-dsh web
-~~~
-
-Or install from Git:
+Install the pinned Git version:
 
 ~~~sh
 dsh plugin --profile web add github:duroey/dsh-study-tree#v0.1.6
+dsh web
 ~~~
+
+Or download `dsh-study-tree-0.1.6.tgz` from [Releases](https://github.com/duroey/dsh-study-tree/releases/tag/v0.1.6), then install the local archive:
+
+~~~sh
+dsh plugin --profile web add ./dsh-study-tree-0.1.6.tgz
+~~~
+
+Pinned Git installation, anonymous release download, and local installation of that download have been verified. If your package manager times out fetching a GitHub attachment directly, use either route above.
 
 Built files are committed and included in the archive; users do not need a separate plugin build. Replace `web` if using another profile. Restart DSH and refresh the page after replacing a loaded version.
 

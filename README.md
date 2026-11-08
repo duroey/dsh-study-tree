@@ -36,24 +36,20 @@
 
 需要 DeepSeek Harness Web。建议使用 **Node.js 24**；安装和配置宿主请参考 [DSH 官方说明](https://github.com/deepseek-ai/deepseek-harness#run)。
 
-推荐安装已经构建好的 Release 包：
+推荐固定版本的 Git 安装：
 
 ~~~sh
-dsh plugin --profile web add https://github.com/duroey/dsh-study-tree/releases/download/v0.1.6/dsh-study-tree-0.1.6.tgz
+dsh plugin --profile web add github:duroey/dsh-study-tree#v0.1.6
 dsh web
 ~~~
 
-也可以先从 [Releases](https://github.com/duroey/dsh-study-tree/releases) 下载 `.tgz`，再安装本地文件：
+也可以从 [Releases](https://github.com/duroey/dsh-study-tree/releases/tag/v0.1.6) 下载 `dsh-study-tree-0.1.6.tgz`，再安装本地文件：
 
 ~~~sh
 dsh plugin --profile web add ./dsh-study-tree-0.1.6.tgz
 ~~~
 
-Git 安装入口：
-
-~~~sh
-dsh plugin --profile web add github:duroey/dsh-study-tree#v0.1.6
-~~~
+固定版本 Git 安装、公开附件下载及下载后的本地安装均已验证。若包管理器直接拉取 GitHub 附件遇到网络超时，使用上述两种入口即可。
 
 仓库和 Release 都包含构建产物，使用者不需要另外构建插件。使用其他 profile 时，将安装命令里的 `web` 换成你的 profile。更新已经加载的版本后，重启 DSH 并刷新页面，确保 Host 与浏览器加载的是同一版。
 

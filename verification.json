@@ -83,7 +83,26 @@
     "noNewRuntimeDependencies": true,
     "noUserSessionIdsOrPrivateHostPathsInThisSummary": true,
     "remoteCi": "GitHub Actions is the live source for remote contract-check status; it does not replace UI acceptance.",
-    "releaseVerification": "See versioned GitHub release notes for public URL download/install results."
+    "releaseVerification": "See versioned GitHub release notes for public URL download/install results.",
+    "releaseUrl": "https://github.com/duroey/dsh-study-tree/releases/tag/v0.1.6",
+    "releaseCommit": "cb4f3ee792c21601aa4b4177ec2bd5a73b3b8f08",
+    "releaseCiRun": "https://github.com/duroey/dsh-study-tree/actions/runs/42466865324",
+    "releaseCiConclusion": "success",
+    "anonymousDownloadBytes": 123569,
+    "anonymousDownloadMatchesBuiltArchive": true,
+    "pinnedGitTagInstallVerified": true,
+    "downloadedArchiveLocalInstallVerified": true,
+    "bothPublicInstallRoutesPassedNineContracts": true,
+    "renderedMetadataVerified": [
+      "zh",
+      "en"
+    ],
+    "renderedIconDimensions": [
+      64,
+      64
+    ],
+    "directUrlInstallerObservation": "One direct attachment fetch returned HTTP 504; documented install routes use the pinned Git tag or an already-downloaded archive.",
+    "runtimeFilesUnchangedDuringPublication": true
   },
   "limits": [
     "The complete recursive fork flow was not rerun for the drag-only v0.1.6 patch.",
